@@ -1,9 +1,13 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { httpBatchLink } from '@trpc/client'
 import { useState } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import './App.css'
-import { IndexPage } from './components/pages'
+import { SignIn } from './pages/auth/SignIn'
+import { SignUp } from './pages/auth/SignUp'
+import { MyBooks } from './pages/books/MyBooks'
+import { Index } from './pages/Index'
 import { trpc } from './utils/trpc'
 
 function App() {
@@ -21,7 +25,18 @@ function App() {
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
-        <IndexPage />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="auth">
+              <Route path="signin" element={<SignIn />} />
+              <Route path="signup" element={<SignUp />} />
+            </Route>
+            <Route path="books">
+              <Route path="" element={<MyBooks />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </QueryClientProvider>
     </trpc.Provider>
   )
