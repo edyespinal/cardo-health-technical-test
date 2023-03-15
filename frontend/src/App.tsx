@@ -3,7 +3,7 @@ import { httpBatchLink } from '@trpc/client'
 import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import './App.css'
+import { Layout } from './components/layout/Layout'
 import { SignIn } from './pages/auth/SignIn'
 import { SignUp } from './pages/auth/SignUp'
 import { MyBooks } from './pages/books/MyBooks'
@@ -27,7 +27,9 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Layout />}>
+              <Route path="" element={<Index />} />
+            </Route>
             <Route path="auth">
               <Route path="signin" element={<SignIn />} />
               <Route path="signup" element={<SignUp />} />
