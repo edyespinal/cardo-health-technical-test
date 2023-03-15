@@ -27,7 +27,7 @@
     "no-return-await": "error",
     "no-shadow": "error",
     "no-useless-return": "error",
-    "no-unused-vars": "error",
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "no-var": "error",
     "padding-line-between-statements": [
       "error",

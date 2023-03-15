@@ -2,3 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Charis';
+  src: url('/static/fonts/CharisSILR.ttf');
+}
+
+@font-face {
+  font-family: 'Bebas';
+  src: url('/static/fonts/Bebas-Regular.otf');
+}
+
+* {
+  font-family: 'Charis', 'Baskerville', Georgia, serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Bebas', Arial, Helvetica, sans-serif;
+}
