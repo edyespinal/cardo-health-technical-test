@@ -9,7 +9,6 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { createUserSession } from '../../services/session'
 import { trpc } from '../../utils/trpc'
@@ -25,8 +24,6 @@ interface FormValues {
 const SignUp = () => {
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('Something went wrong')
-
-  const navigate = useNavigate()
 
   const form = useForm<FormValues>({
     initialValues: {
@@ -62,7 +59,7 @@ const SignUp = () => {
 
     if (user) {
       createUserSession(user)
-      navigate('/', { replace: true })
+      window.location.href = '/'
 
       return
     }

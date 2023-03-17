@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import { Avatar, Container, Menu, Text, UnstyledButton } from '@mantine/core'
-import { useNavigate } from 'react-router-dom'
 
 import { useSession } from '../../hooks/useSession'
 import { logOut } from '../../services/session'
@@ -8,12 +7,10 @@ import { logOut } from '../../services/session'
 const Navbar = () => {
   const { user } = useSession()
 
-  const navigate = useNavigate()
-
   const handleLogOut = () => {
     logOut()
 
-    navigate('/auth/signup', { replace: true })
+    window.location.href = '/auth/signup'
   }
 
   return (

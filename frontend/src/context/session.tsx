@@ -17,18 +17,17 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
       const foundSession = localStorage.getItem('session')
 
       if (!foundSession) {
-        setSession({
-          ...session,
-          loading: false,
-        })
-
         return
       }
 
-      const parsedSession = JSON.parse(foundSession) as Session
+      const { user } = JSON.parse(foundSession) as Session
+
+      if (!user) {
+        return
+      }
 
       setSession({
-        user: parsedSession.user,
+        user,
         loading: false,
       })
     }

@@ -1,9 +1,10 @@
 import { Container, Text, Title } from '@mantine/core'
+import { useLoaderData } from 'react-router-dom'
 
-import { useSession } from '../hooks/useSession'
+import { User } from '../../../backend/src/user/types'
 
 const Index = () => {
-  const { user } = useSession()
+  const user = useLoaderData() as Omit<User, 'password'>
 
   return (
     <Container size="lg">
