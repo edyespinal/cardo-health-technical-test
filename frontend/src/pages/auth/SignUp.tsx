@@ -9,8 +9,9 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
+import { createUserSession } from '../../services/session'
 import { trpc } from '../../utils/trpc'
 
 interface FormValues {
@@ -24,6 +25,8 @@ interface FormValues {
 const SignUp = () => {
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('Something went wrong')
+
+  const navigate = useNavigate()
 
   const form = useForm<FormValues>({
     initialValues: {
@@ -58,7 +61,10 @@ const SignUp = () => {
     })
 
     if (user) {
-      window.location.href = '/'
+      createUserSession(user)
+      navigate('/', { replace: true })
+
+      return
     }
 
     setLoading(false)
@@ -137,11 +143,6 @@ const SignUp = () => {
                 </Button>
               </div>
             </form>
-            <Link to="/auth/signin">
-              <Text className="mt-4 text-center" size="sm" color="dimmed">
-                Already have an account? Sign in
-              </Text>
-            </Link>
           </div>
         </div>
       </Container>
