@@ -13,9 +13,7 @@ const Navbar = () => {
   const handleLogOut = () => {
     logOut()
 
-    navigate('/auth/signup', {
-      replace: true,
-    })
+    navigate('/auth/signup', { replace: true })
   }
 
   return (
