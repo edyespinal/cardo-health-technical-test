@@ -1,3 +1,4 @@
+import { User } from '../../../backend/src/user/types'
 import { Session } from '../definitions/session'
 
 export function isSignedIn() {
@@ -10,4 +11,20 @@ export function isSignedIn() {
   const { user } = JSON.parse(session) as Session
 
   return user
+}
+
+export function createUserSession(user: Omit<User, 'password'>) {
+  const { email, firstName, lastName, books = [] } = user
+
+  localStorage.setItem(
+    'session',
+    JSON.stringify({
+      user: { email, firstName, lastName, books },
+      loading: false,
+    })
+  )
+}
+
+export function logOut() {
+  localStorage.removeItem('session')
 }

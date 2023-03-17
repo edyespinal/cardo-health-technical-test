@@ -1,10 +1,22 @@
 /* eslint-disable no-console */
 import { Avatar, Container, Menu, Text, UnstyledButton } from '@mantine/core'
+import { useNavigate } from 'react-router-dom'
 
 import { useSession } from '../../hooks/useSession'
+import { logOut } from '../../services/session'
 
 const Navbar = () => {
   const { user } = useSession()
+
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+    logOut()
+
+    navigate('/auth/signup', {
+      replace: true,
+    })
+  }
 
   return (
     <Container fluid p={0}>
@@ -21,9 +33,7 @@ const Navbar = () => {
             <Menu.Label>
               <Text size="sm">{`${user?.firstName} ${user?.lastName}`} </Text>
             </Menu.Label>
-            <Menu.Item onClick={() => console.log('TODO: handleLogout')}>
-              Logout
-            </Menu.Item>
+            <Menu.Item onClick={handleLogOut}>Logout</Menu.Item>
           </Menu.Dropdown>
         </Menu>
       </div>
