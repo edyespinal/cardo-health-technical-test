@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: 'Bebas';
-  src: url('/static/fonts/Bebas-Regular.otf');
+  src: url('/static/fonts/Bebas-Regular.ttf');
 }
 
 * {
