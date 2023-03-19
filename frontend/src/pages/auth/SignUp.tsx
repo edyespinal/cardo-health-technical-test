@@ -45,24 +45,26 @@ const SignUp = () => {
     }
   }, [createUser.error])
 
-  const handleSubmit = async (values: FormValues) => {
+  const handleSubmit = (values: FormValues) => {
     setLoading(true)
 
     const { email, password, firstName, lastName } = values
 
-    const user = await createUser.mutateAsync({
-      email,
-      password,
-      firstName,
-      lastName,
-    })
+    createUser.mutateAsync(
+      {
+        email,
+        password,
+        firstName,
+        lastName,
+      },
+      {
+        onSuccess(data) {
+          createUserSession(data)
 
-    if (user) {
-      createUserSession(user)
-      window.location.href = '/'
-
-      return
-    }
+          window.location.href = '/'
+        },
+      }
+    )
 
     setLoading(false)
   }

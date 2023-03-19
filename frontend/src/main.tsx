@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import { theme } from './theme'
+import { components } from './theme/components'
 
 const emotionCache = createEmotionCache({
   key: 'mantine',
@@ -14,8 +15,10 @@ const emotionCache = createEmotionCache({
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <MantineProvider
-      theme={theme}
-      withGlobalStyles
+      theme={{
+        ...theme,
+        components,
+      }}
       withNormalizeCSS
       emotionCache={emotionCache}
     >

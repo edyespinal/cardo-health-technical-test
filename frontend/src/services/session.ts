@@ -1,4 +1,3 @@
-import { User } from '../../../backend/src/user/types'
 import { Session } from '../definitions/session'
 
 export function isSignedIn() {
@@ -13,13 +12,13 @@ export function isSignedIn() {
   return user
 }
 
-export function createUserSession(user: Omit<User, 'password'>) {
-  const { email, firstName, lastName, books = [] } = user
+export function createUserSession(user: Session['user']) {
+  const { email, firstName, lastName } = user
 
   localStorage.setItem(
     'session',
     JSON.stringify({
-      user: { email, firstName, lastName, books },
+      user: { email, firstName, lastName },
       loading: false,
     })
   )
