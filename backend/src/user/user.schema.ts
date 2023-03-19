@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { book } from '../book/types'
+import { book } from '../book/book.schema'
 
 export const user = z.object({
   id: z.string(),
