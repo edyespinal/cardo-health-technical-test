@@ -1,5 +1,12 @@
-/* eslint-disable no-console */
-import { Avatar, Container, Menu, Text, UnstyledButton } from '@mantine/core'
+import {
+  Avatar,
+  Container,
+  Menu,
+  Text,
+  Title,
+  UnstyledButton,
+} from '@mantine/core'
+import { Link } from 'react-router-dom'
 
 import { useSession } from '../../hooks/useSession'
 import { logOut } from '../../services/session'
@@ -14,9 +21,14 @@ const Navbar = () => {
   }
 
   return (
-    <Container fluid p={0}>
-      <div className="flex justify-between py-2 px-8 mb-8 shadow-lg">
-        <h1 className="text-brand">CardoBooks</h1>
+    <Container fluid className="shadow-lg">
+      <Container py={12} className="flex justify-between py-2 px-8 mb-8">
+        <Link to="/">
+          <Title color="brand" className="text-brand">
+            CardoBooks
+          </Title>
+        </Link>
+
         <Menu shadow={'md'} width={200}>
           <Menu.Target>
             <UnstyledButton className="drop-shadow-lg">
@@ -31,7 +43,7 @@ const Navbar = () => {
             <Menu.Item onClick={handleLogOut}>Logout</Menu.Item>
           </Menu.Dropdown>
         </Menu>
-      </div>
+      </Container>
     </Container>
   )
 }
