@@ -4,7 +4,6 @@ import { useState } from 'react'
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  redirect,
   Route,
   RouterProvider,
 } from 'react-router-dom'
@@ -12,9 +11,10 @@ import {
 import { Layout } from './components/layout/Layout'
 import { SessionProvider } from './context/session'
 import { SignUp } from './pages/auth/SignUp'
-import { MyBooks } from './pages/books/MyBooks'
+import { BookDetails } from './pages/books/BookDetails'
+import { NewBook } from './pages/books/NewBook'
 import { Index } from './pages/Index'
-import { isSignedIn } from './services/session'
+import { isSignedInLoader } from './utils/pageLoaders/signedInLoader'
 import { trpc } from './utils/trpc'
 
 function App() {
@@ -31,29 +31,18 @@ function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <>
-        <Route path="/" element={<Layout />}>
-          <Route
-            path=""
-            element={<Index />}
-            loader={() => {
-              const user = isSignedIn()
-
-              if (!user) {
-                throw redirect('/auth/signup')
-              }
-
-              return user
-            }}
-          />
+      <Route>
+        <Route path="/" loader={isSignedInLoader} element={<Layout />}>
+          <Route path="" element={<Index />} />
         </Route>
         <Route path="auth">
           <Route path="signup" element={<SignUp />} />
         </Route>
-        <Route path="books">
-          <Route path="" element={<MyBooks />} />
+        <Route path="books" loader={isSignedInLoader} element={<Layout />}>
+          <Route path="new" element={<NewBook />} />
+          <Route path=":id" element={<BookDetails />} />
         </Route>
-      </>
+      </Route>
     )
   )
 
