@@ -7,9 +7,6 @@ import { useSession } from '../hooks/useSession'
 const Index = () => {
   const { user } = useSession()
 
-  // eslint-disable-next-line no-console
-  console.log({ user })
-
   return (
     <Container>
       <div className="mb-8 flex justify-between">

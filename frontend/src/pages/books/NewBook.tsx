@@ -31,10 +31,6 @@ const NewBook = () => {
     }
 
     const { title, author, year, cover } = values
-
-    // eslint-disable-next-line no-console
-    console.log({ values })
-
     const newBook = await createBook.mutateAsync({
       title,
       author,
@@ -42,27 +38,16 @@ const NewBook = () => {
       cover,
     })
 
-    // eslint-disable-next-line no-console
-    console.log({ newBook })
-
     if (newBook) {
-      try {
-        const updated = await updateUser.mutateAsync({
-          email: user.email as string,
-          books: newBook,
-        })
+      const updated = await updateUser.mutateAsync({
+        email: user.email as string,
+        book: newBook,
+      })
 
-        // eslint-disable-next-line no-console
-        console.log(updated)
+      if (updated) {
+        window.location.href = '/'
 
-        if (updated) {
-          window.location.href = '/'
-
-          return
-        }
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.warn(error)
+        return
       }
     }
 
