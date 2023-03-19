@@ -3,9 +3,9 @@ import { z } from 'zod'
 
 import { users } from './mock.data'
 import { user, User } from './types'
+import { publicProcedure, router } from '../app/trpc'
 import { books } from '../book/mock.data'
 import { book } from '../book/types'
-import { publicProcedure, router } from '../trpc'
 
 export const userRouter = router({
   createUser: publicProcedure

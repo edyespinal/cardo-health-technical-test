@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 import { books } from './mock.data'
 import { book, Book } from './types'
-import { publicProcedure, router } from '../trpc'
+import { publicProcedure, router } from '../app/trpc'
 
 export const bookRouter = router({
   getAllBooks: publicProcedure.query<Book[]>(() => {
