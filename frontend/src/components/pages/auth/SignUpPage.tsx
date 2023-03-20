@@ -6,6 +6,7 @@ import {
   PasswordInput,
   Checkbox,
   Button,
+  Title,
 } from '@mantine/core'
 import { UseFormReturnType } from '@mantine/form/lib/types'
 
@@ -17,7 +18,13 @@ const SignUpPage = ({ form, handleSubmit, loading, error }: Props) => {
       <Container size="sm" className="h-full">
         <div className="h-full w-full grid place-items-center">
           <div className="w-full sm:w-3/5">
-            <h1 className="font-semibold mb-8">Sign Up</h1>
+            <div className="mb-12">
+              <Title align="center" color="brand" className="text-brand">
+                CardoBooks
+              </Title>
+            </div>
+
+            <h1 className="font-semibold mb-4">Sign Up</h1>
 
             {loading && (
               <div className="grid place-items-center my-4 text-sm">

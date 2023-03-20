@@ -1,6 +1,6 @@
 import { Container, Text, Title } from '@mantine/core'
 
-import { EmptyState } from '../components/common/EmptyState'
+import { EmptyState } from '../components/common/EmptyState/EmptyState'
 import { BooksPage } from '../components/pages/books/BooksPage'
 import { useSession } from '../hooks/useSession'
 import { trpc } from '../utils/trpc'
