@@ -7,5 +7,15 @@
       "dest": "src/server.ts",
       "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
     }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
+    },
+    {
+      "source": "/cardo-frontend.vercel.app/(.*)",
+      "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
+    }
   ]
 }
