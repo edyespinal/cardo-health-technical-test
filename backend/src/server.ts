@@ -7,7 +7,7 @@ import { appRouter } from './app/router'
 
 const app: Application = express()
 
-app.use(cors({ origin: true }))
+app.use(cors())
 
 app.use(
   '/v1/api',
