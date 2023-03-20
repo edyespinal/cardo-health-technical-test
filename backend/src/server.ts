@@ -9,7 +9,7 @@ const app: Application = express()
 
 app.use(
   cors({
-    origin: false,
+    origin: ['*', 'https://cardo-frontend.vercel.app'],
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH', 'OPTIONS'],
   })
 )
