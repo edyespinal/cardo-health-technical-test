@@ -2,13 +2,32 @@ import { TRPCError } from '@trpc/server'
 
 import { users } from './user.data'
 import { User } from './user.schema'
-import { books } from '../book/book.data'
-import { Book } from '../book/book.schema'
 
 type CreateUserInput = Omit<User, 'id' | 'books'>
-type UpdateUserBooksInput = { email: string; book: Book }
+type UpdateUserBookInput = { email: string; bookId: string }
 
 export const userServices = {
+  getUser: function (input: string) {
+    const user = users.find(({ email }) => email === input)
+
+    if (!user) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: JSON.stringify({
+          code: 'not_found',
+          message: 'User not found',
+        }),
+      })
+    }
+
+    return {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      books: user.books,
+    }
+  },
   createUser: function (input: CreateUserInput) {
     const userExists = users.some(
       (userElement) => userElement.email === input.email
@@ -36,8 +55,8 @@ export const userServices = {
 
     return newUser
   },
-  updateUserBooks: function (input: UpdateUserBooksInput) {
-    const { email, book: updatedBook } = input
+  addUserBook: function (input: UpdateUserBookInput) {
+    const { email, bookId } = input
 
     const userIndex = users.findIndex(
       (userElement) => userElement.email === email
@@ -53,9 +72,40 @@ export const userServices = {
       })
     }
 
-    const bookIndex = books.findIndex(
-      (bookElement) => bookElement.id === updatedBook.id
+    const userHasBook = users[userIndex].books.includes(bookId)
+
+    if (userHasBook) {
+      throw new TRPCError({
+        code: 'CONFLICT',
+        message: JSON.stringify({
+          code: 'already_exists',
+          message: 'User already has book',
+        }),
+      })
+    }
+
+    users[userIndex].books.push(bookId)
+
+    return true
+  },
+  removeUserBook: function (input: UpdateUserBookInput) {
+    const { email, bookId } = input
+
+    const userIndex = users.findIndex(
+      (userElement) => userElement.email === email
     )
+
+    if (userIndex < 0) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: JSON.stringify({
+          code: 'not_found',
+          message: "Unable to update user's book",
+        }),
+      })
+    }
+
+    const bookIndex = users[userIndex].books.findIndex((id) => id === bookId)
 
     if (bookIndex < 0) {
       throw new TRPCError({
@@ -67,8 +117,6 @@ export const userServices = {
       })
     }
 
-    books[bookIndex] = updatedBook
-
-    return true
+    users[userIndex].books.splice(bookIndex, 1)
   },
 }

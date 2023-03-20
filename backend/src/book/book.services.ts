@@ -10,13 +10,35 @@ export const bookServices = {
   getAllBooks: function () {
     return books
   },
-  getUserBooks: function (email: string) {
-    const user = users.find((userElement) => userElement.email === email)
+  getUserBooks: function (input: string) {
+    const user = users.find(({ email }) => email === input)
 
-    return user
+    if (!user) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: JSON.stringify({
+          code: 'not_found',
+          message: 'User not found',
+        }),
+      })
+    }
+
+    const userBooks = books.filter(({ id }) => user.books.includes(id))
+
+    return userBooks
   },
-  getBook: function (id: string) {
-    const foundBook = books.find((bookElement) => bookElement.id === id)
+  getBook: function (input: string) {
+    const foundBook = books.find(({ id }) => id === input)
+
+    if (!foundBook) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: JSON.stringify({
+          code: 'not_found',
+          message: 'Book not found',
+        }),
+      })
+    }
 
     return foundBook
   },
@@ -66,8 +88,8 @@ export const bookServices = {
 
     return true
   },
-  deleteBook: function (id: string) {
-    const index = books.findIndex((bookElement) => bookElement.id === id)
+  deleteBook: function (input: string) {
+    const index = books.findIndex(({ id }) => id === input)
 
     if (index < 0) {
       return false
