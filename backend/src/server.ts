@@ -8,11 +8,14 @@ import { appRouter } from './app/router'
 const app: Application = express()
 
 app.use(
-  '/v1/api',
   cors({
-    origin: '*',
+    origin: false,
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH', 'OPTIONS'],
-  }),
+  })
+)
+
+app.use(
+  '/v1/api',
   createExpressMiddleware({
     router: appRouter,
     createContext,
