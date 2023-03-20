@@ -8,6 +8,11 @@
 }
 
 @font-face {
+  font-family: 'Charis Bold';
+  src: url('/static/fonts/CharisSILB.ttf');
+}
+
+@font-face {
   font-family: 'Bebas';
   src: url('/static/fonts/Bebas-Regular.ttf');
 }
@@ -16,6 +21,7 @@
   html,
   body {
     font-family: 'Charis', 'serif';
+    font-size: 17px;
   }
 
   h1,

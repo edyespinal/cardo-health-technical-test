@@ -10,6 +10,9 @@ const Layout = () => {
       <Container size="lg" className="h-full">
         <Outlet />
       </Container>
+      <div className="fixed bottom-2 w-screen text-center">
+        <p className="text-neutral-400">made by edy espinal</p>
+      </div>
     </Container>
   )
 }

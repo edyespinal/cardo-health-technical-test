@@ -1,6 +1,6 @@
-import { Card, Image, Text } from '@mantine/core'
+import { Card, Image, Text, Title } from '@mantine/core'
 
-import { Book } from '../../../../backend/src/book/types'
+import { Book } from '../../../../backend/src/book/book.schema'
 
 interface Props {
   book: Book
@@ -8,18 +8,22 @@ interface Props {
 
 const BookCard = ({ book }: Props) => {
   return (
-    <Card shadow="lg" className="w-56">
+    <Card shadow="lg" className="w-52 h-80">
       <Card.Section>
-        <div className="grid place-items-center">
-          <Image
-            src={book.cover ?? import.meta.env.VITE_PLACEHOLDER_IMAGE}
-            height={200}
-          />
-        </div>
+        <Image
+          src={book.cover ?? import.meta.env.VITE_PLACEHOLDER_IMAGE}
+          height={200}
+        />
       </Card.Section>
-      <Text>{book.title}</Text>
-      <Text>{book.author}</Text>
-      <Text>{book.year ?? '-'}</Text>
+      <div className="absolute bottom-4">
+        <Title order={4} lineClamp={1}>
+          {book.title}
+        </Title>
+        <Text>{book.author}</Text>
+        <Text color="dimmed" size="sm">
+          {book.year ?? '-'}
+        </Text>
+      </div>
     </Card>
   )
 }

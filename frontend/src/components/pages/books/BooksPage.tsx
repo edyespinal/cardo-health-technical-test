@@ -1,20 +1,11 @@
-import { Container, Loader, Text } from '@mantine/core'
+import { Container } from '@mantine/core'
 import { Link } from 'react-router-dom'
 
-import { trpc } from '../../../utils/trpc'
+import { Book } from '../../../../../backend/src/book/book.schema'
 import { BookCard } from '../../books/BookCard'
+import { NewBookCard } from '../../books/NewBookCard'
 
-const Books = () => {
-  const { data: books, isLoading, error } = trpc.getAllBooks.useQuery()
-
-  if (error) {
-    return <Text>Unable to get books :(</Text>
-  }
-
-  if (isLoading) {
-    return <Loader />
-  }
-
+const BooksPage = ({ books }: Props) => {
   const bookCards = books.map((book) => {
     return (
       <div key={book.id} className="max-w-xl">
@@ -28,8 +19,11 @@ const Books = () => {
   return (
     <Container fluid px={0} className="flex gap-8 flex-wrap">
       {bookCards}
+      <NewBookCard />
     </Container>
   )
 }
 
-export { Books }
+type Props = { books: Book[] }
+
+export { BooksPage }

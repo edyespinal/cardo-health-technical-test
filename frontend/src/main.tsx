@@ -3,9 +3,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
-import './index.css'
-import { theme } from './theme'
-import { components } from './theme/components'
+import './styles/index.css'
+import { theme } from './styles/theme'
+import { components } from './styles/theme/components'
 
 const emotionCache = createEmotionCache({
   key: 'mantine',
