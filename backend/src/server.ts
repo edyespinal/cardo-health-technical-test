@@ -17,4 +17,18 @@ app.use(
   })
 )
 
+app.use('/', (_, res) => {
+  res.send(`
+    <h2>Cardo Health</h2>
+    <p>Technical test backend</p>
+    
+    <a href="/v1/api/get-user-books?input=%22edy@espinal.com%22">
+      <p>Get user books query</p>
+    </a>
+    <a href="/v1/api/get-user-books?input=%22invalidEmail%22">
+      <p>Invalid email query</p>
+    </a>
+  `)
+})
+
 app.listen(process.env.PORT)
