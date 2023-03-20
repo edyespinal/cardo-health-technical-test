@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom'
 
 import { useSession } from '../../hooks/useSession'
-import { logOut } from '../../services/session'
+import { logOut } from '../../utils/session'
 
 const Navbar = () => {
   const { user } = useSession()

@@ -1,20 +1,17 @@
 import { redirect } from 'react-router-dom'
 
-import { isSignedIn } from '../../services/session'
-import { trpc } from '../trpc'
+import { signedInUser } from '../session'
 
+/**
+ * PageLoader - check if user is authenticated
+ * @returns User session information
+ */
 export const isSignedInLoader = () => {
-  const user = isSignedIn()
+  const user = signedInUser()
 
   if (!user) {
     throw redirect('/auth/signup')
   }
 
   return user
-}
-
-export const getBook = async (id: string) => {
-  const { data: book } = trpc.getBook.useQuery(id)
-
-  return book
 }

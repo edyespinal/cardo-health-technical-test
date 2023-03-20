@@ -2,15 +2,10 @@ import { createContext, ReactNode, useEffect, useState } from 'react'
 
 import { Session } from '../definitions/session'
 
-const initialContext: Session = {
-  user: undefined,
-  loading: true,
-}
-
-export const SessionContext = createContext<Session>(initialContext)
+export const SessionContext = createContext({} as Session)
 
 export const SessionProvider = ({ children }: { children: ReactNode }) => {
-  const [session, setSession] = useState(initialContext)
+  const [session, setSession] = useState({} as Session)
 
   useEffect(() => {
     function checkSession() {
@@ -22,13 +17,8 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
 
       const { user } = JSON.parse(foundSession) as Session
 
-      if (!user) {
-        return
-      }
-
       setSession({
         user,
-        loading: false,
       })
     }
 
