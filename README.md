@@ -62,11 +62,12 @@ You can find a deployed version of the backend here:
 
 You can find a deployed version of the app here: [CardoBooks Frontend](https://cardo-frontend.vercel.app/)
 
-### What would you improve if given more time?
+### What would I improve if I had more time?
 
 - Error handling. Right now, we ae only handling some errors.
 - Correct deployment. There is some misconfiguration with `CORS`.
 - Authentication and authorization on the backend.
+- Testing and code coverage.
 
 <div style="margin-top: 5rem">
 Cheers 🍻
