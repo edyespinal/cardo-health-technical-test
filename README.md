@@ -23,7 +23,7 @@ I take coding challenges as opportunities to learn something new and to test tec
 For this one I decided to try to implement [`tRPC`](https://trpc.io/) (which I haven't used extensively before) to get a solid, type-safe, scalable and stable API and data layer for the application[^1].
 [^1]:_I have to say I'm quite impressed with tRPC_
 
-Having said that, I ran into some problems with the deployment regarding some `CORS` configuration which is preventing the frontend to properly communicate with the backend.
+Having said that, I ran into some problems with the deployment to AWS regarding my account. I temporarily deployed it in a different platform (Vercel, which doesn't support containers) but it currently has some configuration issues regarding `CORS` which is preventing the frontend to properly communicate with the backend.
 
 If you which to test the application locally:
 **Frontend**
